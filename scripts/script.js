@@ -20,14 +20,13 @@ function generateButton() {
     newBtn.innerText="Button";
     newBtn.className = 'button';
     newBtn.id = ++idButton;
+    newBtn.onclick = checkClickedButton;
     groupbtns.appendChild(newBtn);
   }
   noButtons.focus();
 }
 
 submitNumber.addEventListener('click', generateButton);
-
-groupbtns.addEventListener('click', checkClickedButton);
 
 function checkClickedButton(ev) {
   if (!ev.target.nodeName === 'BUTTON' || gameOver) return;
