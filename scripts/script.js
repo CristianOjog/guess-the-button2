@@ -7,7 +7,6 @@ const card = document.querySelector('.card');
 let gameOver = false;
 let randomNumber;
 let resetButton;
-let idButton = 0;
 noButtons.focus();
 
 function generateButton() {
@@ -15,22 +14,14 @@ function generateButton() {
   noButtons.disabled = true;
   const userInputNum = Number(noButtons.value);
   randomNumber = Math.floor(Math.random() * userInputNum) + 1;
-  for (let i = 0; i < userInputNum; ++i) {
-    let newBtn = document.createElement('button');
-    newBtn.innerText="Button";
-    newBtn.className = 'button';
-    newBtn.id = ++idButton;
-    newBtn.onclick = checkClickedButton;
-    groupbtns.appendChild(newBtn);
+  for (let i = 1; i <= userInputNum; ++i) {
+    groupbtns.innerHTML += `<button class="button" onClick="checkClickedButton(${Number(i)})">Button</button>`;
   }
   noButtons.focus();
 }
 
-submitNumber.addEventListener('click', generateButton);
-
-function checkClickedButton(ev) {
-  if (!ev.target.nodeName === 'BUTTON' || gameOver) return;
-  if(Number(ev.target.id) === randomNumber) {
+function checkClickedButton(idButton) {
+  if(Number(idButton) === randomNumber) {
     lastResult.textContent = 'Congratulations! You got it right!';
     lastResult.style.backgroundColor = 'green';
   } else {
